@@ -22,15 +22,20 @@ Naming/VariableNumber:
 
 RSpec/BeNil:
   EnforcedStyle: be
+
 RSpecRails/HaveHttpStatus:
   Enabled: false
+
 RSpec/ExampleLength:
   Max: 20
   Enabled: true
+
 RSpec/MultipleExpectations:
   Enabled: false
+
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+
 RSpec/NestedGroups:
   Enabled: false
 

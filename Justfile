@@ -24,3 +24,7 @@ rubocop-fix:
 # Setups the project for contributing
 setup:
   bin/setup
+
+# Run the RSpec tests
+test:
+  bundle exec rspec
