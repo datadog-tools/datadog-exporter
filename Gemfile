@@ -8,3 +8,5 @@ gem "rubocop-rspec"
 gem "rubocop-rspec_rails"
 
 gem "prettier"
+
+gem "pry-byebug"
