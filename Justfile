@@ -37,5 +37,10 @@ test:
 typecheck:
   bundle exec solargraph typecheck
 
+# Generate the yard documentation
 yard:
   yard doc
+
+# Opens the yard documentation in the browser
+yard-server:
+  yard server
