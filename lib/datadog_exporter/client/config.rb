@@ -5,7 +5,7 @@ module DatadogExporter
     ##
     # The configuration for the DatadogExporter::Client.
     class Config
-      attr_reader :logger, :base_path
+      attr_reader :logger
 
       # NOTE: See DatadogExporter::Configurations to see the available options
       def initialize(**options)
@@ -15,6 +15,10 @@ module DatadogExporter
           options[:application_key] || DatadogExporter.configuration.application_key
         @logger = options[:logger] || DatadogExporter.configuration.logger
         @base_path = options[:base_path] || DatadogExporter.configuration.base_path
+      end
+
+      def base_path
+        Pathname.new(@base_path)
       end
 
       # Creates the Datadog API global configuration

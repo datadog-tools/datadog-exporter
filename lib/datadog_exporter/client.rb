@@ -10,9 +10,10 @@ module DatadogExporter
     end
 
     # Creates the Datadog API client
-    # @return [DatadogAPIClient::APIClient]
     #
     # See https://github.com/DataDog/datadog-api-client-ruby/blob/master/lib/datadog_api_client/api_client.rb
+    #
+    # @return [DatadogAPIClient::APIClient]
     def datadog_client
       @datadog_client ||= DatadogAPIClient::APIClient.new(@datadog_config)
     end

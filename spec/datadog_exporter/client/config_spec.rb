@@ -7,6 +7,12 @@ RSpec.describe DatadogExporter::Client::Config do
   let(:logger) { nil }
   let(:base_path) { nil }
 
+  before do
+    stub_const("ENV", ENV.to_hash.merge("DATADOG_API_KEY" => nil))
+    stub_const("ENV", ENV.to_hash.merge("DATADOG_APPLICATION_KEY" => nil))
+    stub_const("ENV", ENV.to_hash.merge("DATADOG_API_SITE" => nil))
+  end
+
   describe "#base_path" do
     subject(:config_base_path) { config.base_path }
 
@@ -16,7 +22,7 @@ RSpec.describe DatadogExporter::Client::Config do
       let(:base_path) { Dir.pwd }
 
       it "sets the base path sent" do
-        expect(config_base_path).to eq(base_path)
+        expect(config_base_path).to eq(Pathname.new(base_path))
       end
     end
 
@@ -24,7 +30,7 @@ RSpec.describe DatadogExporter::Client::Config do
       before { DatadogExporter.configure { |config| config.base_path = "#{Dir.pwd}/global" } }
 
       it "sets the base path global value" do
-        expect(config_base_path).to eq("#{Dir.pwd}/global")
+        expect(config_base_path).to eq(Pathname.new("#{Dir.pwd}/global"))
       end
     end
   end
