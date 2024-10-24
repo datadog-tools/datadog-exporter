@@ -5,9 +5,7 @@ module DatadogExporter
   # The client that makes the actual requests to the DatadogAPIClient.
   # `config` is an instance of `DatadogApi::Client::Config::Base`
   class Client
-    def initialize(
-      config: DatadogExporter::Client::Config.new
-    )
+    def initialize(config: DatadogExporter::Client::Config.new)
       @datadog_config = config.datadog_api_configuration
     end
 

@@ -11,7 +11,8 @@ module DatadogExporter
       def initialize(**options)
         @site = options[:site] || DatadogExporter.configuration.site
         @api_key = options[:api_key] || DatadogExporter.configuration.api_key
-        @application_key = options[:application_key] || DatadogExporter.configuration.application_key
+        @application_key =
+          options[:application_key] || DatadogExporter.configuration.application_key
         @logger = options[:logger] || DatadogExporter.configuration.logger
       end
 

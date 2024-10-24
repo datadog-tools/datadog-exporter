@@ -1,9 +1,5 @@
 RSpec.describe DatadogExporter::Client::Config do
-  subject(:config) do
-    described_class.new(
-      site:, api_key:, application_key:, logger:,
-    )
-  end
+  subject(:config) { described_class.new(site:, api_key:, application_key:, logger:) }
 
   let(:site) { nil }
   let(:api_key) { nil }
@@ -22,9 +18,7 @@ RSpec.describe DatadogExporter::Client::Config do
     end
 
     context "when the global config is set" do
-      before do
-        DatadogExporter.configure { |config| config.logger = "global-logger" }
-      end
+      before { DatadogExporter.configure { |config| config.logger = "global-logger" } }
 
       it "sets the looger global value" do
         expect(config_logger).to eq("global-logger")
@@ -59,9 +53,7 @@ RSpec.describe DatadogExporter::Client::Config do
       end
 
       context "when the global config is set" do
-        before do
-          DatadogExporter.configure { |config| config.api_key = "global-api-key" }
-        end
+        before { DatadogExporter.configure { |config| config.api_key = "global-api-key" } }
 
         after do
           DatadogExporter.configure { |config| config.api_key = ENV.fetch("DATADOG_API_KEY", nil) }
@@ -97,12 +89,12 @@ RSpec.describe DatadogExporter::Client::Config do
       end
 
       context "when the global config is set" do
-        before do
-          DatadogExporter.configure { |config| config.application_key = "global-app-key" }
-        end
+        before { DatadogExporter.configure { |config| config.application_key = "global-app-key" } }
 
         after do
-          DatadogExporter.configure { |config| config.application_key = ENV.fetch("DATADOG_APPLICATION_KEY", nil) }
+          DatadogExporter.configure do |config|
+            config.application_key = ENV.fetch("DATADOG_APPLICATION_KEY", nil)
+          end
         end
 
         it "sets the application_key global value" do
@@ -135,9 +127,7 @@ RSpec.describe DatadogExporter::Client::Config do
       end
 
       context "when the global config is set" do
-        before do
-          DatadogExporter.configure { |config| config.site = "datadoghq.eu" }
-        end
+        before { DatadogExporter.configure { |config| config.site = "datadoghq.eu" } }
 
         after do
           DatadogExporter.configure { |config| config.site = ENV.fetch("DATADOG_API_SITE", nil) }

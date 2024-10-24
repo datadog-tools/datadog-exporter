@@ -1,9 +1,5 @@
 RSpec.describe DatadogExporter::Client do
-  subject(:client) do
-    described_class.new(
-      config: config,
-    )
-  end
+  subject(:client) { described_class.new(config: config) }
 
   let(:config) { instance_double(DatadogExporter::Client::Config) }
   let(:datadog_api_configuration) { DatadogAPIClient::Configuration.default }

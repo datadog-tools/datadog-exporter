@@ -13,6 +13,8 @@ gem "rubocop-rspec"
 gem "rubocop-rspec_rails"
 gem "solargraph"
 
+gem "simplecov"
+
 gem "prettier"
 
 gem "pry-byebug"
