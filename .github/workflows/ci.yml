@@ -8,7 +8,7 @@ jobs:
   Lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
@@ -22,13 +22,19 @@ jobs:
           - ruby: 3.3
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - run: bundle exec rspec
-      - uses: codecov/codecov-action@v3
+
+      # Ensure Node.js 20 is set up before running codecov-action
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: codecov/codecov-action@v3.1.5
         with:
           files: .resultset.json
           directory: coverage
