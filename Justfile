@@ -9,6 +9,12 @@ ci: format rubocop typecheck test
 console:
   bin/console
 
+# Opens HTML page with tests coverage
+cov: test coverage
+
+coverage:
+  open coverage/index.html
+
 # Format files with Prettier
 format:
   bundle exec rbprettier --write '**/*.{rb,json,yml,md}'
