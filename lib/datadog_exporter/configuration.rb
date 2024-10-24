@@ -28,7 +28,7 @@ module DatadogExporter
     end
 
     add_setting :logger, -> { Logger.new($stdout) }
-    add_setting :config_path, -> { File.expand_path(__FILE__, "datadog_exporter.yml") }
+    add_setting :base_path, -> { Dir.pwd }
     add_setting :site, -> { ENV.fetch("DATADOG_API_SITE", nil) }
     add_setting :api_key, -> { ENV.fetch("DATADOG_API_KEY", nil) }
     add_setting :application_key, -> { ENV.fetch("DATADOG_APPLICATION_KEY", nil) }
