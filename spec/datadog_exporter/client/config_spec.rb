@@ -1,10 +1,33 @@
 RSpec.describe DatadogExporter::Client::Config do
-  subject(:config) { described_class.new(site:, api_key:, application_key:, logger:) }
+  subject(:config) { described_class.new(site:, api_key:, application_key:, logger:, base_path:) }
 
   let(:site) { nil }
   let(:api_key) { nil }
   let(:application_key) { nil }
   let(:logger) { nil }
+  let(:base_path) { nil }
+
+  describe "#base_path" do
+    subject(:config_base_path) { config.base_path }
+
+    let(:base_path) { nil }
+
+    context "when the base path is sent to the initializer" do
+      let(:base_path) { Dir.pwd }
+
+      it "sets the base path sent" do
+        expect(config_base_path).to eq(base_path)
+      end
+    end
+
+    context "when the global config is set" do
+      before { DatadogExporter.configure { |config| config.base_path = "#{Dir.pwd}/global" } }
+
+      it "sets the base path global value" do
+        expect(config_base_path).to eq("#{Dir.pwd}/global")
+      end
+    end
+  end
 
   describe "#logger" do
     subject(:config_logger) { config.logger }
@@ -12,7 +35,7 @@ RSpec.describe DatadogExporter::Client::Config do
     context "when the looger is sent to the initializer" do
       let(:logger) { "logger" }
 
-      it "sets the api-key sent" do
+      it "sets the logger sent" do
         expect(config_logger).to eq("logger")
       end
     end
