@@ -1,0 +1,4 @@
+require_paths:
+  - ./stubs
+  - ./lib
+  - ./spec

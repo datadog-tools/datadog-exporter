@@ -1,6 +1,7 @@
 require "datadog_exporter/configuration"
 require "datadog_exporter/client"
 require "datadog_exporter/datadog_api_requests"
+require "datadog_exporter/monitors"
 
 ##
 # The DatadogExporter tool
