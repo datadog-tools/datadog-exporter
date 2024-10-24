@@ -13,7 +13,6 @@ console:
 format:
   bundle exec rbprettier --write '**/*.{rb,json,yml,md}'
 
-# Lint the Ruby files with Rubocop
 rubocop:
   bundle exec rubocop
 
