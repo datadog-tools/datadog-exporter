@@ -13,6 +13,16 @@ RSpec.describe DatadogExporter::Client::Config do
     stub_const("ENV", ENV.to_hash.merge("DATADOG_API_SITE" => nil))
   end
 
+  after do
+    DatadogExporter.configure do |config|
+      config.api_key = nil
+      config.application_key = nil
+      config.site = nil
+      config.logger = nil
+      config.base_path = nil
+    end
+  end
+
   describe "#base_path" do
     subject(:config_base_path) { config.base_path }
 

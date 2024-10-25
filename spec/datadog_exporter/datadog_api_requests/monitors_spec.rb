@@ -8,8 +8,8 @@ RSpec.describe DatadogExporter::DatadogApiRequests::Monitors do
   let(:monitors_api) { instance_double(DatadogAPIClient::V1::MonitorsAPI) }
   let(:datadog_client) { DatadogAPIClient::APIClient.new }
 
-  let(:monitor_a) { DatadogAPIClient::V1::Monitor.new(tags: ["tag1"]) }
-  let(:monitor_b) { DatadogAPIClient::V1::Monitor.new(tags: ["tag2"]) }
+  let(:monitor_a) { DatadogAPIClient::V1::Monitor.new(id: 1, tags: ["tag1"]) }
+  let(:monitor_b) { DatadogAPIClient::V1::Monitor.new(id: 2, tags: ["tag2"]) }
 
   before do
     allow(client).to receive(:datadog_client).and_return(datadog_client)
@@ -39,11 +39,21 @@ RSpec.describe DatadogExporter::DatadogApiRequests::Monitors do
     end
   end
 
-  describe "#monitor" do
+  describe "#find" do
     before { allow(monitors_api).to receive(:get_monitor).and_return(monitor_a) }
 
     it "returns the monitor" do
-      expect(request.monitor("monitor_id")).to eq(monitor_a.to_hash)
+      expect(request.find("monitor_id")).to eq(monitor_a.to_hash)
+    end
+  end
+
+  describe "#create" do
+    before do
+      allow(monitors_api).to receive(:create_monitor).with(monitor_a.to_hash).and_return(monitor_a)
+    end
+
+    it "creates the monitor" do
+      expect(request.create(monitor_a.to_hash)).to eq(1)
     end
   end
 end

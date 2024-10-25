@@ -1,0 +1,16 @@
+:monitors:
+  :template_keys:
+    - :name
+    - :type
+    - :query
+    - :options
+    - :tags
+    - :message
+
+  :placeholders:
+    :base:
+      :dbname: dbname:production
+      :namespace: namespace:production
+      :pagerduty_alert: "@pagerduty-prod"
+      :teams_datadog_alert: "@slack-bot-datadog-alerts"
+      :environment: env:production

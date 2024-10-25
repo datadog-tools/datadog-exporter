@@ -5,6 +5,18 @@ module DatadogExporter
     ##
     # The configuration for the DatadogExporter::Client.
     class Config
+      ORGANIZATIONS_CONFIG_FILE = "organizations_config.yml".freeze
+      DEFAULT_ORGANIZATIONS_CONFIGURATIONS = {
+        monitors: {
+          export_tag: "",
+          template_keys: [],
+          placeholders: {
+            base: {
+            },
+          },
+        },
+      }.freeze
+
       attr_reader :logger
 
       # NOTE: See DatadogExporter::Configurations to see the available options
@@ -30,6 +42,14 @@ module DatadogExporter
           client_config.api_key = @api_key
           client_config.application_key = @application_key
         end
+      end
+
+      def organizations_config
+        organizations_config_file = base_path.join(ORGANIZATIONS_CONFIG_FILE)
+
+        return DEFAULT_ORGANIZATIONS_CONFIGURATIONS unless File.exist?(organizations_config_file)
+
+        DEFAULT_ORGANIZATIONS_CONFIGURATIONS.merge(YAML.load_file(organizations_config_file))
       end
     end
   end
