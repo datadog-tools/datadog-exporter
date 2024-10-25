@@ -35,9 +35,21 @@ module DatadogExporter
       # @param [Integer] monitor_id The monitor ID in Datadog
       #
       # @return [Hash] The monitor configuration
-      def monitor(monitor_id)
+      def find(monitor_id)
         monitor = @monitors_api.get_monitor(monitor_id)
         monitor.to_hash
+      end
+
+      ##
+      # Creates a monitor in Datadog
+      #
+      # @param [Hash] monitor_hash The monitor configuration
+      #
+      # @return [Integer] The monitor ID
+      def create(monitor_hash)
+        monitor = @monitors_api.create_monitor(monitor_hash)
+
+        monitor.id
       end
     end
   end

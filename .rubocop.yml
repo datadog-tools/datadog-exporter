@@ -17,6 +17,10 @@ Metrics/MethodLength:
   Max: 20
   Enabled: true
 
+# Disabled because of the extended usage of dependency injection
+Metrics/ParameterLists:
+  Enabled: false
+
 Naming/VariableNumber:
   EnforcedStyle: snake_case
 
