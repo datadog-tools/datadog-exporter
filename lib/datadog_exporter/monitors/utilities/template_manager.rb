@@ -3,14 +3,14 @@ module DatadogExporter
     module Utilities
       ##
       # This class transform the monitor into a template
-      class TemplateCreator
+      class TemplateManager
         ##
         # This class replaces the matching text with a placeholder
         class StringToPlaceholder
           attr_reader :original_string, :placeholders
 
-          def initialize(orirignal_string, placeholders)
-            @original_string = orirignal_string
+          def initialize(original_string, placeholders)
+            @original_string = original_string
             @placeholders = placeholders
           end
 
@@ -21,6 +21,29 @@ module DatadogExporter
               placeholder = "#{placeholder_name}_placeholder"
               original_string.include?(matching_text) &&
                 replaced_string.gsub!(matching_text, placeholder)
+            end
+
+            replaced_string
+          end
+        end
+
+        ##
+        # This class replaces the matching placeholder with text
+        class PlaceholderToString
+          attr_reader :target_string, :placeholders
+
+          def initialize(placeholders, target_string)
+            @placeholders = placeholders
+            @target_string = target_string
+          end
+
+          def replace
+            replaced_string = target_string.dup
+
+            placeholders.each do |placeholder_name, target_text|
+              placeholder = "#{placeholder_name}_placeholder"
+              target_string.include?(placeholder) &&
+                replaced_string.gsub!(placeholder, target_text)
             end
 
             replaced_string
@@ -41,10 +64,16 @@ module DatadogExporter
         #
         # @return [Hash] The transformed monitor into a template with placeholders
         # If no placeholder is defined, it returns the monitor as it is
-        def create(datadog_hash, environment: :base)
+        def create_template(datadog_hash, environment: :base)
           placeholders = @config[:placeholders][environment]
 
           replace_values_with_placeholders(filter_by_template_keys(datadog_hash), placeholders)
+        end
+
+        def create_monitor(template, environment: :base)
+          placeholders = @config[:placeholders][environment]
+
+          replace_placeholders_with_values(placeholders, filter_by_template_keys(template))
         end
 
         private
@@ -67,6 +96,23 @@ module DatadogExporter
             when Array
               hash_data[key] = value.map do |value|
                 StringToPlaceholder.new(value, placeholders).replace
+              end
+            end
+          end
+        end
+
+        def replace_placeholders_with_values(placeholders, hash_data)
+          return hash_data if placeholders.nil?
+
+          hash_data.each do |key, value|
+            case value
+            when Hash
+              replace_placeholders_with_values(placeholders, value)
+            when String
+              hash_data[key] = PlaceholderToString.new(placeholders, value).replace
+            when Array
+              hash_data[key] = value.map do |value|
+                PlaceholderToString.new(placeholders, value).replace
               end
             end
           end

@@ -1,0 +1,23 @@
+---
+:message: "The Database is running out of disk space.\n\nFor
+  more details refer to https://example.com/rds-monitors.md#disk-usage\n\nNotify:
+  @ @noop\n\n{{#is_alert}}[skipped] [skipped]{{/is_alert}}\n\n{{#is_alert_recovery}}[skipped]{{/is_alert_recovery}}
+  \n\n{{#is_no_data}}[skipped] [skipped]{{/is_no_data}}\n\n{{#is_no_data_recovery}}[skipped]{{/is_no_data_recovery}}\n\n{{#is_recovery}}[skipped]{{/is_recovery}}"
+:name: RDS | Api | Disk Usage
+:options:
+  :evaluation_delay: 900
+  :include_tags: true
+  :new_host_delay: 300
+  :notify_audit: false
+  :notify_no_data: false
+  :require_full_window: true
+  :silenced: {}
+  :thresholds:
+    :critical: 0.1
+    :warning: 0.25
+:query: avg(last_1h):avg:aws.rds.free_storage_space{dbname:staging}
+  / avg:aws.rds.total_storage_space{dbname:staging} < 0.1
+:tags:
+  - env:staging
+  - namespace:staging
+:type: query alert

@@ -1,6 +1,7 @@
 require_relative "monitors/utilities/name_transformer"
-require_relative "monitors/utilities/template_creator"
+require_relative "monitors/utilities/template_manager"
 require_relative "monitors/export"
+require_relative "monitors/import"
 
 module DatadogExporter
   ##
