@@ -4,7 +4,11 @@ require "datadog_exporter"
 require "pry-byebug"
 require "simplecov"
 
-SimpleCov.start
+SimpleCov.start do
+  enable_coverage :branch
+  primary_coverage :branch
+  minimum_coverage 99
+end
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
