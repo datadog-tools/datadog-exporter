@@ -8,8 +8,9 @@
   </a>
 
   <a href="https://codecov.io/gh/datadog-tools/datadog-exporter" >
-    <img src="https://codecov.io/gh/datadog-tools/datadog-exporter/branch/main/graph/badge.svg?token=RC9T5DVSW8"/>
+    <img src="https://codecov.io/gh/datadog-tools/datadog-exporter/graph/badge.svg?token=RC9T5DVSW8"/>
   </a>
+
   <!--
   <a href="https://rubygems.org/gems/datadog-export">
     <img src="https://badge.fury.io/rb/datadog-export.svg" alt="Gem Version" height="18">
