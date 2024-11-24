@@ -34,7 +34,10 @@ jobs:
         with:
           node-version: "20"
 
-      - uses: codecov/codecov-action@v3.1.5
+      - run: bundle exec rspec
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
         with:
-          files: .resultset.json
+          verbose: true
           directory: coverage
+          files: .resultset.json
