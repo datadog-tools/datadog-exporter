@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: write
+
 jobs:
   Lint:
     runs-on: ubuntu-latest
@@ -28,15 +31,11 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      # Ensure Node.js 20 is set up before running codecov-action
-      - name: Set up Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+      - name: Run tests and create coverage
+        run: bundle exec rspec
 
-      - run: bundle exec rspec
-      - uses: codecov/codecov-action@v3.1.5
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
         with:
-          verbose: true
-          directory: coverage
-          files: .resultset.json
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/.resultset.json
