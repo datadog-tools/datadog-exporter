@@ -1,0 +1,40 @@
+---
+:created: "2020-11-23T08:22:33.355+00:00"
+:creator:
+  :email: test@example.de
+  :handle: test@example.de
+  :name:
+  :id: 1000009652
+:deleted:
+:id: 440110
+:matching_downtimes: []
+:message: "The Database is running out of disk space.\n\nFor
+  more details refer to https://example.com/rds-monitors.md#disk-usage\n\nNotify:
+  @ @noop\n\n{{#is_alert}}@pagerduty-prod @slack-bot-datadog-alerts{{/is_alert}}\n\n{{#is_alert_recovery}}@slack-bot-datadog-alerts{{/is_alert_recovery}}
+  \n\n{{#is_no_data}}@pagerduty-prod @slack-bot-datadog-alerts{{/is_no_data}}\n\n{{#is_no_data_recovery}}@slack-bot-datadog-alerts{{/is_no_data_recovery}}\n\n{{#is_recovery}}@pagerduty-prod{{/is_recovery}}"
+:modified: "2024-10-18T07:22:04.500+00:00"
+:multi: false
+:name: RDS | Api | Disk Usage
+:options:
+  :evaluation_delay: 900
+  :include_tags: true
+  :new_host_delay: 300
+  :notify_audit: false
+  :notify_no_data: false
+  :require_full_window: true
+  :silenced: {}
+  :thresholds:
+    :critical: 0.1
+    :warning: 0.25
+:overall_state: OK
+:priority:
+:query: avg(last_1h):avg:aws.rds.free_storage_space{dbname:production}
+  / avg:aws.rds.total_storage_space{dbname:production} < 0.1
+:restricted_roles:
+:tags:
+  - env:production
+  - namespace:production
+:type: query alert
+:org_id: 10000005
+:created_at: 1606119753000
+:overall_state_modified: "2023-05-07T02:48:16+00:00"

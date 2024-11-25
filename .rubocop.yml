@@ -21,6 +21,9 @@ Metrics/MethodLength:
 Metrics/ParameterLists:
   Enabled: false
 
+Style/IfUnlessModifier:
+  Enabled: false
+
 Naming/VariableNumber:
   EnforcedStyle: snake_case
 
