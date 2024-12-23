@@ -26,6 +26,10 @@
 
 ### Monitors
 
+Find your datadog site in the "SITE PARAMETER" column of the table [Getting started with Datadog Sites](https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site).
+
+Learn how to create your own api key and application key in your [Datadog API and Application Keys documentation](https://docs.datadoghq.com/account_management/api-app-keys/).
+
 #### Export
 
 You can export the current configuration of your montors to keep a safe copy of their configuration. The next piece of code will export all your monitors in your home folder.

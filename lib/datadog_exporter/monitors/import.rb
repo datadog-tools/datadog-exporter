@@ -38,18 +38,17 @@ module DatadogExporter
             template = @template_manager.create_template(monitor)
             target_monitor = @template_manager.create_monitor(template, environment: to)
             @request.create(target_monitor) if accepted?(target_monitor, to)
-        end
+          end
       end
 
       private
 
       def monitors
-        @monitors_base_path.glob("*.yml").map do |file|
-          YAML.load_file(
-            file,
-            permitted_classes: [Symbol, Time, Date, DateTime, Object],
-          )
-        end
+        @monitors_base_path
+          .glob("*.yml")
+          .map do |file|
+            YAML.load_file(file, permitted_classes: [Symbol, Time, Date, DateTime, Object])
+          end
       end
 
       def accepted?(monitor, to)

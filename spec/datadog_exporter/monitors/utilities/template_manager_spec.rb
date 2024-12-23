@@ -19,8 +19,9 @@ RSpec.describe DatadogExporter::Monitors::Utilities::TemplateManager do
     end
 
     it "creates a template with placeholders" do
-      expect(templator.create_template(original_datadog_hash, environment: :base))
-        .to eq(output_datadog_hash)
+      expect(templator.create_template(original_datadog_hash, environment: :base)).to eq(
+        output_datadog_hash,
+      )
     end
   end
 
@@ -33,8 +34,9 @@ RSpec.describe DatadogExporter::Monitors::Utilities::TemplateManager do
     end
 
     it "creates a new monitor with the placeholders replaced" do
-      expect(templator.create_monitor(template_datadog_hash, environment: :staging))
-        .to eq(staging_datadog_hash)
+      expect(templator.create_monitor(template_datadog_hash, environment: :staging)).to eq(
+        staging_datadog_hash,
+      )
     end
   end
 end

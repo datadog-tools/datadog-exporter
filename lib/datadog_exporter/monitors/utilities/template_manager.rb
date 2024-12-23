@@ -42,8 +42,7 @@ module DatadogExporter
 
             placeholders.each do |placeholder_name, target_text|
               placeholder = "#{placeholder_name}_placeholder"
-              target_string.include?(placeholder) &&
-                replaced_string.gsub!(placeholder, target_text)
+              target_string.include?(placeholder) && replaced_string.gsub!(placeholder, target_text)
             end
 
             replaced_string
