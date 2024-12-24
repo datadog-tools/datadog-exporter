@@ -30,9 +30,33 @@ Find your datadog site in the "SITE PARAMETER" column of the table [Getting star
 
 Learn how to create your own api key and application key in your [Datadog API and Application Keys documentation](https://docs.datadoghq.com/account_management/api-app-keys/).
 
-#### Export
+#### Configuration
 
-You can export the current configuration of your montors to keep a safe copy of their configuration. The next piece of code will export all your monitors in your home folder.
+- Configure an "organizations_config.yml" file in your base path. This file will define the keys you want to import and the placeholders you want to replace.
+
+```yaml
+:monitors:
+  :template_keys:
+    - :name
+    - :type
+    - :query
+    - :options
+    - :tags
+    - :message
+
+  :placeholders:
+    :base:
+      :dbname: dbname:production
+      :namespace: namespace:production
+      :environment: env:production
+
+    :staging:
+      :dbname: dbname:staging
+      :namespace: namespace:staging
+      :environment: env:staging
+```
+
+Before running any of the tools, you need to configure the library with your Datadog credentials. The following code will configure the library to use your Datadog credentials. This way, the importer tool will replace the placeholders with the values of your environment and will only use the defined template keys when importing a monitor.
 
 ```ruby
 require "datadog_export"
@@ -43,8 +67,22 @@ DatadogExporter.configure do |config|
   config.application_key = "your_application_key"
   config.base_path = ENV["HOME"]
 end
+```
 
+#### Export
+
+You can export the current configuration of your montors to keep a safe copy of their configuration. The next piece of code will export all your monitors in your home folder.
+
+```ruby
 DatadogExporter::Monitors.export
+```
+
+#### Import
+
+You can import monitors to Datadog, by using previously exported monitors and replacing the configured placeholders with the values of your environment.
+
+```ruby
+DatadogExporter::Monitors::Import.new.import(to: :staging)
 ```
 
 ## Development
