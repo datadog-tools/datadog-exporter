@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    datadog-exporter (0.1.0)
-      faraday (>= 2.0.0)
+    datadog-exporter (0.2.0)
+      datadog_api_client (~> 2.29.1)
+      faraday (~> 2.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -21,12 +22,8 @@ GEM
     diff-lcs (1.5.1)
     docile (1.4.1)
     e2mmap (0.1.0)
-    faraday (2.12.2)
-      faraday-net_http (>= 2.0, < 3.5)
-      json
-      logger
-    faraday-net_http (3.4.0)
-      net-http (>= 0.5.0)
+    faraday (2.0.0)
+      ruby2_keywords (>= 0.0.4)
     haml (6.3.0)
       temple (>= 0.8.2)
       thor
@@ -42,13 +39,10 @@ GEM
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     language_server-protocol (3.17.0.3)
-    logger (1.6.4)
     method_source (1.1.0)
     mini_mime (1.1.5)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
-    net-http (0.6.0)
-      uri
     nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
@@ -109,6 +103,7 @@ GEM
       rubocop (~> 1.61)
       rubocop-rspec (~> 3, >= 3.0.1)
     ruby-progressbar (1.13.0)
+    ruby2_keywords (0.0.5)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -147,7 +142,6 @@ GEM
     unicode-display_width (3.1.2)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
-    uri (1.0.2)
     uuidtools (2.1.5)
     yard (0.9.37)
     zeitwerk (2.7.1)
