@@ -32,7 +32,7 @@ Learn how to create your own api key and application key in your [Datadog API an
 
 #### Configuration
 
-- Configure an "organizations_config.yml" file in your base path. This file will define the keys you want to import and the placeholders you want to replace.
+- Configure an "organizations_config.yml" file in your base path. This file will define the keys you want to import and the placeholders you want to replace. This way, the importer tool will replace the placeholders with the values of your environment and will only use the defined template keys when importing a monitor.
 
 ```yaml
 :monitors:
@@ -56,7 +56,7 @@ Learn how to create your own api key and application key in your [Datadog API an
       :environment: env:staging
 ```
 
-Before running any of the tools, you need to configure the library with your Datadog credentials. The following code will configure the library to use your Datadog credentials. This way, the importer tool will replace the placeholders with the values of your environment and will only use the defined template keys when importing a monitor.
+Before running any of the tools, you need to configure the library with your Datadog credentials. The following code will configure the library to use your Datadog credentials.
 
 ```ruby
 require "datadog_export"
