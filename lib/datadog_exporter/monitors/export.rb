@@ -10,7 +10,7 @@ module DatadogExporter
         client: DatadogExporter::Client.new(config:),
         request: DatadogExporter::DatadogApiRequests::Monitors.new(config:, client:),
         name_transformer: Utilities::NameTransformer.new,
-        template_creator: Utilities::TemplateCreator.new(config:),
+        template_creator: Utilities::TemplateManager.new(config:),
         file_class: File
       )
         @config = config
@@ -40,7 +40,7 @@ module DatadogExporter
       # Exports Datadog monitors configuration in YAML files as templates.
       # If no tag is provided, it exports all the monitors.
       #
-      # See TemplateCreator for more information about the transformation.
+      # See TemplateManager for more information about the transformation.
       #
       # @param [String] tag (optional) A tag defined in the Datadog monitors
       #
@@ -70,7 +70,7 @@ module DatadogExporter
       def save_template(exported_datadog_hash)
         save!(
           "template.#{@name_transformer.transform(exported_datadog_hash[:name])}",
-          @template_creator.create(exported_datadog_hash).to_yaml,
+          @template_creator.create_template(exported_datadog_hash).to_yaml,
         )
       end
 

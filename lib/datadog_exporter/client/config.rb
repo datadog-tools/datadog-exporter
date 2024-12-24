@@ -5,7 +5,6 @@ module DatadogExporter
     ##
     # The configuration for the DatadogExporter::Client.
     class Config
-      ORGANIZATIONS_CONFIG_FILE = "organizations_config.yml".freeze
       DEFAULT_ORGANIZATIONS_CONFIGURATIONS = {
         monitors: {
           export_tag: "",
@@ -20,13 +19,16 @@ module DatadogExporter
       attr_reader :logger
 
       # NOTE: See DatadogExporter::Configurations to see the available options
-      def initialize(**options)
+      def initialize(**options) # rubocop:disable Metrics/AbcSize
         @site = options[:site] || DatadogExporter.configuration.site
         @api_key = options[:api_key] || DatadogExporter.configuration.api_key
         @application_key =
           options[:application_key] || DatadogExporter.configuration.application_key
         @logger = options[:logger] || DatadogExporter.configuration.logger
         @base_path = options[:base_path] || DatadogExporter.configuration.base_path
+        @organizations_config_filename =
+          options[:org_config_filename] ||
+            DatadogExporter.configuration.organizations_config_filename
       end
 
       def base_path
@@ -45,9 +47,14 @@ module DatadogExporter
       end
 
       def organizations_config
-        organizations_config_file = base_path.join(ORGANIZATIONS_CONFIG_FILE)
+        organizations_config_file = base_path.join(@organizations_config_filename)
 
-        return DEFAULT_ORGANIZATIONS_CONFIGURATIONS unless File.exist?(organizations_config_file)
+        unless File.exist?(organizations_config_file)
+          warn(
+            "WARNING: Organizations configuration file not found: #{organizations_config_file}. Using default configuration.",
+          )
+          return DEFAULT_ORGANIZATIONS_CONFIGURATIONS
+        end
 
         DEFAULT_ORGANIZATIONS_CONFIGURATIONS.merge(YAML.load_file(organizations_config_file))
       end

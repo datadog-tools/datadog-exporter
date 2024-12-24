@@ -14,3 +14,10 @@
       :pagerduty_alert: "@pagerduty-prod"
       :teams_datadog_alert: "@slack-bot-datadog-alerts"
       :environment: env:production
+
+    :staging:
+      :dbname: dbname:staging
+      :namespace: namespace:staging
+      :pagerduty_alert: "[skipped]"
+      :teams_datadog_alert: "[skipped]"
+      :environment: env:staging

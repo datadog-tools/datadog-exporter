@@ -7,7 +7,7 @@ RSpec.describe DatadogExporter::Monitors::Export do
   let(:client) { instance_double(DatadogExporter::Client) }
   let(:request) { instance_double(DatadogExporter::DatadogApiRequests::Monitors) }
   let(:file_class) { class_double(File) }
-  let(:template_creator) { instance_double(DatadogExporter::Monitors::Utilities::TemplateCreator) }
+  let(:template_creator) { instance_double(DatadogExporter::Monitors::Utilities::TemplateManager) }
 
   let(:config_base_path) { Dir.pwd }
   let(:monitors_base_path) { export_monitors.instance_variable_get(:@monitors_base_path) }
@@ -75,10 +75,10 @@ RSpec.describe DatadogExporter::Monitors::Export do
     let(:folder_exists) { true }
 
     before do
-      allow(template_creator).to receive(:create).with(monitors_data[0]).and_return(
+      allow(template_creator).to receive(:create_template).with(monitors_data[0]).and_return(
         monitors_data[0],
       )
-      allow(template_creator).to receive(:create).with(monitors_data[1]).and_return(
+      allow(template_creator).to receive(:create_template).with(monitors_data[1]).and_return(
         monitors_data[1],
       )
 

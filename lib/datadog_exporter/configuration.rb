@@ -27,10 +27,14 @@ module DatadogExporter
       end
     end
 
+    DEFAULT_ORG_CONFIG_FILENAME = "organizations_config.yml".freeze
+
     add_setting :logger, -> { Logger.new($stdout) }
     add_setting :base_path, -> { Dir.pwd }
     add_setting :site, -> { ENV.fetch("DATADOG_API_SITE", nil) }
     add_setting :api_key, -> { ENV.fetch("DATADOG_API_KEY", nil) }
     add_setting :application_key, -> { ENV.fetch("DATADOG_APPLICATION_KEY", nil) }
+    add_setting :organizations_config_filename,
+                -> { ENV.fetch("DATADOG_ORG_CONFIG_FILENAME", DEFAULT_ORG_CONFIG_FILENAME) }
   end
 end
