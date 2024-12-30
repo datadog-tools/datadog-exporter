@@ -3,7 +3,7 @@ PATH
   specs:
     datadog-exporter (0.2.1)
       datadog_api_client (~> 2.29.1)
-      faraday (~> 2.0.0)
+      faraday (~> 2.0, >= 2.0.0)
 
 GEM
   remote: https://rubygems.org/
