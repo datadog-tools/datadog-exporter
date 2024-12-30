@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.2.2] - 2024-12-30
+
+- Resolved Faraday dependency issue by adjusting the version of the faraday gem.
+
 ## [0.2.1] - 2024-12-24
 
 - This version is still not valid
