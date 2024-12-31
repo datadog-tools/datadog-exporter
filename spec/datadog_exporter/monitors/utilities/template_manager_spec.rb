@@ -39,4 +39,16 @@ RSpec.describe DatadogExporter::Monitors::Utilities::TemplateManager do
       )
     end
   end
+
+  describe "#filter_by_template_keys" do
+    let(:original_datadog_hash) do
+      YAML.load_file("spec/datadog_exporter/monitors/utilities/fixtures/original_monitor.yml")
+    end
+
+    it "filters the keys of the monitor" do
+      expect(templator.filter_by_template_keys(original_datadog_hash).keys).to eq(
+        %i[name type query options tags message],
+      )
+    end
+  end
 end

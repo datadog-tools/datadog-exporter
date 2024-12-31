@@ -21,6 +21,10 @@ module DatadogExporter
         @file_class = file_class
       end
 
+      def list(tag: nil, &)
+        monitors(tag:).each(&)
+      end
+
       ##
       # Exports Datadog monitors configuration in YAML files.
       # If no tag is provided, it exports all the monitors.
@@ -31,7 +35,7 @@ module DatadogExporter
       def export(tag: nil)
         reset_monitors_dir
 
-        monitors(tag:).each { |exported_datadog_hash| save_original(exported_datadog_hash) }
+        list(tag:) { |exported_datadog_hash| save_original(exported_datadog_hash) }
 
         config.logger.info("Exported #{@monitors.count} monitors to #{@monitors_base_path}")
       end
@@ -48,7 +52,7 @@ module DatadogExporter
       def export_as_template(tag: nil)
         reset_monitors_dir
 
-        monitors(tag:).each { |exported_datadog_hash| save_template(exported_datadog_hash) }
+        list(tag:) { |exported_datadog_hash| save_template(exported_datadog_hash) }
 
         config.logger.info(
           "Exported #{@monitors.count} monitor templates to #{@monitors_base_path}",

@@ -18,6 +18,8 @@ module DatadogExporter
             replaced_string = original_string.dup
 
             placeholders.each do |placeholder_name, matching_text|
+              raise "Unknown placeholder value for #{placeholder_name}" if matching_text == ""
+
               placeholder = "#{placeholder_name}_placeholder"
               original_string.include?(matching_text) &&
                 replaced_string.gsub!(matching_text, placeholder)
@@ -75,13 +77,13 @@ module DatadogExporter
           replace_placeholders_with_values(placeholders, filter_by_template_keys(template))
         end
 
-        private
-
         def filter_by_template_keys(datadog_hash)
           return datadog_hash if template_keys.empty?
 
           datadog_hash.slice(*template_keys)
         end
+
+        private
 
         def replace_values_with_placeholders(hash_data, placeholders)
           return hash_data if placeholders.nil?
