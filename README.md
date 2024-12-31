@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-  This library provides tools to easily export/import configurations from <a href="https://www.datadoghq.com/">Datadog</a>
+  This library provides tools to easily export/import configurations from <a href="https://www.datadoghq.com/">Datadog</a> to keep your configuration safe and to easily replicate it in different environments.
 </p>
 
 ## Usage

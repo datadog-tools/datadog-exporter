@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    datadog-exporter (0.2.3)
+    datadog-exporter (0.2.4)
       datadog_api_client (~> 2.29.1)
       faraday (~> 2.0, >= 2.0.0)
 

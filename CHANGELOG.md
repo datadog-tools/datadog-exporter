@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.2.4] - 2024-12-31
+
+- Prevent the creation of duplicated monitors
+
 ## [0.2.3] - 2024-12-30
 
 - Resolved Faraday dependency issue by upgrading the faraday gem.
