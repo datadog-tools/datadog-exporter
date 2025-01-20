@@ -1,3 +1,3 @@
 module DatadogExporter
-  VERSION = "0.2.3".freeze
+  VERSION = "0.2.5".freeze
 end
