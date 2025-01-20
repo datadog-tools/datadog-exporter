@@ -37,12 +37,13 @@ module DatadogExporter
       # If a tag is provided, it imports only the monitors with that tag.
       #
       # @param [Symbol] to The environment (defined in your organizations_config_filename) where the monitors will be imported
+      # @param [Symbol] from (optional) The environment (defined in your organizations_config_filename) where the placeholders are defined
       # @param [String] tag (optional) A tag defined in the Datadog monitors
-      def import(to:, tag: nil)
+      def import(to:, from: :base, tag: nil)
         monitors = []
 
         list(tag: tag) do |monitor|
-          template = @template_manager.create_template(monitor)
+          template = @template_manager.create_template(monitor, environment: from)
           monitor = @template_manager.create_monitor(template, environment: to)
 
           if exists?(monitor)
