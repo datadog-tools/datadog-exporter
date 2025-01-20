@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.2.5] - 2025-01-20
+
+- Permit to export from a different environment than base.
+
 ## [0.2.3] - 2024-12-30
 
 - Resolved Faraday dependency issue by upgrading the faraday gem.
