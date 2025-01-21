@@ -1,4 +1,5 @@
 require_relative "datadog_api_requests/monitors"
+require_relative "datadog_api_requests/synthetics"
 
 module DatadogExporter
   ##
