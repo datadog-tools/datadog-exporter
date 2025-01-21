@@ -22,6 +22,12 @@
   This library provides tools to easily export/import configurations from <a href="https://www.datadoghq.com/">Datadog</a>
 </p>
 
+## Disclaimer
+
+This library is not affiliated with Datadog in any way. It is a community-driven project to help developers to manage their Datadog configurations.
+
+It was created to help in an ocasional migration from one Datadog account to another, and this ocasional nature is the reason why some of the classes are missing enough test coverage.
+
 ## Usage
 
 ### Monitors
