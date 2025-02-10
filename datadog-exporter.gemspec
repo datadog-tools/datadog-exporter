@@ -22,6 +22,6 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 3.3"
 
-  spec.add_dependency "datadog_api_client", "~> 2.29.1"
+  spec.add_dependency "datadog_api_client", ">= 2.29.1", "< 2.31.0"
   spec.add_dependency "faraday", "~> 2.0", ">= 2.0.0"
 end
